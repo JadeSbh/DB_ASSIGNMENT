@@ -1,0 +1,16 @@
+
+box(BOX-ID INTEGER, box-name)
+folder(FOLDER-ID INTEGER, folder-name, box-id* NOT NULL)
+label(LABEL-ID INTEGER, label-name)
+contact(CONTACT-ID INTEGER, contact-name, contact-phone, contact-email, folder_id* NOT NULL)
+email(EMAIL-ID INTEGER, email-subject, email-date, email-content, contact-id*)
+conversation(CONVERSATION-ID, conversation-date, conversation-content, email-id* NOT NULL)
+member(MEMBER-ID, contact-id*, conversation-id*)
+replay(REPLAY-ID INTEGER, replay-content, member-ID* NOT NULL)
+
+MANY-TO-MANY:
+contact-label(CONTACT-ID*, LABEL-ID*)
+
+
+
+ 
