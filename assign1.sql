@@ -41,14 +41,14 @@ CREATE TABLE conversation
 );
 --DROP TABLE conversation cascade ;
 
-/*CREATE TABLE groups
+CREATE TABLE groups
 (
-    group_id          INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    group_id          INTEGER GENERATED ALWAYS AS IDENTITY,
     conversation_id   INTEGER REFERENCES conversation (conversation_id),
     members_count INTEGER,
-    emails_of_members TEXT ARRAY
+    primary key(group_id, conversation_id)
 
-); */
+);
 --DROP TABLE groups cascade ;
 
 CREATE TABLE member
@@ -71,20 +71,8 @@ CREATE TABLE email_label
     label_id INTEGER REFERENCES label(label_id),
     primary key (contact_id, label_id)
 );
-CREATE TABLE email_group
-(
-    email_id INTEGER REFERENCES email(email_id),
-    group_id INTEGER REFERENCES groups(group_id),
-    primary key (email_id, group_id)
-);
-CREATE TABLE email_conversation:
-(
-    email_id INTEGER REFERENCES email(email_id),
-    conversation_id INTEGER REFERENCES conversation(conversation_id),
-    primary key (email_id, conversation_id)
-);
+
 --Drop TABLE replay cascade;
 INSERT INTO label(label_name) VALUES ('DB class');
 INSERT INTO folder(folder_name, folder_path, folder_size) VALUES ('first folder','c:/Desktop/new_folder', '20kb');
 INSERT INTO contact(user_name, user_phone, user_email, folder_id) VALUES ('jade', '666-777-0000', '@gmail.com', 1);
-INSERT INTO conversation(conversation_content, contact_id) VALUES ('let us talk about databases', 1);
