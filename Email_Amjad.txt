@@ -1,16 +1,16 @@
-
+user(USER_NAME VARCHAR(50), user_email NOT NULL, password NOT NULL) 
 box(BOX-ID INTEGER, box-name)
 folder(FOLDER-ID INTEGER, folder-name, box-id* NOT NULL)
 label(LABEL-ID INTEGER, label-name)
-contact(CONTACT-ID INTEGER, contact-name, contact-phone, contact-email, folder_id* NOT NULL)
-email(EMAIL-ID INTEGER, email-subject, email-date, email-content, contact-id*)
-conversation(CONVERSATION-ID, conversation-date, conversation-content, email-id* NOT NULL)
-member(MEMBER-ID, contact-id*, conversation-id*)
-replay(REPLAY-ID INTEGER, replay-content, member-ID* NOT NULL)
+contact(CONTACT-ID INTEGER, contact-name, contact-phone, contact-email, user_name* NOT NULL, folder_id* NOT NULL)
+email(EMAIL-ID INTEGER, email-subject, email-date, email-content, contact-id*, user-email* NOT NULL)
+conversation(CONVERSATION-ID, conversation-date, email-id*)
+replay(REPLAY-ID INTEGER, CONVERSATION-ID* NOT NULL, replay-content)
 
 MANY-TO-MANY:
 contact-label(CONTACT-ID*, LABEL-ID*)
+contact-conversation(contact-id*, conversation-id*)
+contact-email(contact-id*, email-id*)
 
 
-
- 
+8 entities + 3 many-to-many. THEREFORE, there will be 11 table. 
